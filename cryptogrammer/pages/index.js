@@ -1,14 +1,13 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import React from 'react'
 
 const Home = () => {
   return (
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+    </div>
   )
 }
 
-
+export default Home;
