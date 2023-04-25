@@ -21,6 +21,7 @@ const CreatorCard = ({ rank, creatorImage, creatorName, creatorEths }) => {
 
           <div className="absolute w-4 h-4 minlg:w-7 minlh:h-7 bottom-2 -right-0">
             <Image src={images.tick} alt="tick" />
+            
           </div>
         </div>
       </div>
