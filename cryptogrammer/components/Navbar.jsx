@@ -14,9 +14,9 @@ const MenuItems = ({ isMobile, active, setActive }) => {
       case 0:
         return "/";
       case 1:
-        return "/created-nft";
+        return "/listed-nfts";
       case 2:
-        return "/my-nfts";
+        return "/my-nft";
       default:
         return "/";
     }
@@ -35,7 +35,9 @@ const MenuItems = ({ isMobile, active, setActive }) => {
           onClick={() => {
             setActive(item);
           }}
-          className={`flex flex-row items-center font-pippins font-semibold text-base dark:hover:text-white hover:text-nft-dark mx-3 ${
+          className={`flex flex-row items-center font-poppins
+          font-semibold text-base dark:hover:text-white hover:text-nft-dark mx-3
+          ${
             active === item
               ? "dark:text-white text-nft-black-1"
               : "dark:text-nft-gray-3 text-nft-gray-2"
@@ -59,6 +61,7 @@ const ButtonGroup = ({ setActive, router }) => {
       classStyles="mx-2 rounded-xl"
       handleClick={() => {
         setActive("");
+
         router.push("/create-nft");
       }}
     />
@@ -83,91 +86,101 @@ const Navbar = () => {
 
   // In here i return the navbar and i'm using the MenuItems function to generate the menu items and i'm using the ButtonGroup function to generate the connect and create buttons.
   return (
-    <nav className="flexBetween w-full fixed z-10 p-4 flex-row border-b dark:bg-nft-dark  bg-white dark:border-nft-black-1 border-nft-gray-1 ">
-      <div className="flex flex-1 flex-row justify-start">
-        <Link href="/">
-          <div
-            className="flexCenter md:hidden cursor-pointer"
-            onClick={() => {}}
-          >
-            <Image
-              src={images.logo02}
-              objectFit="contain "
-              width={32}
-              height={32}
-              alt="logo"
-            />
-            <p className="dark:text-white text-nft-black-1 font-semibold text-lg ml-1">
-              Cryptogrammer
-            </p>
-          </div>
-        </Link>
-        <Link href="/">
-          <div className="hidden md:flex" onClick={() => {}}>
-            <Image
-              src={images.logo02}
-              objectFit="contain "
-              width={32}
-              height={32}
-              alt="logo"
-            />
-          </div>
-        </Link>
-      </div>
-      <div className="flex flex-initial flex-row justify-end">
-        <div className="flex items-center mr-2">
-          <input
-            type="checkbox"
-            className="checkbox"
-            id="checkbox"
-            onChange={() => {
-              setTheme(theme === "dark" ? "light" : "dark");
-            }}
+    <nav className="flexBetween border-nft-gray-1 w-full fixed z-10 p-4 flex-row border-b bg-white dark:border-nft-black-1  dark:bg-nft-dark">
+    <div className="flex flex-1 flex-row justify-start">
+      <Link href="/">
+        <div
+          className="flexCenter md:hidden cursor-pointer"
+          onClick={() => {}}
+        >
+          <Image
+            src={images.logo02}
+            objectFit="contain"
+            width={32}
+            height={32}
+            alt="logo"
           />
-          <label
-            className="flexBetween w-8 h-4 rounded-2xl bg-black p-1 relative label"
-            htmlFor="checkbox"
-          >
-            <i className="fas fa-sun" />
-            <i className="fas fa-moon" />
-            <div className="w-3 h-3 absolute bg-white rounded-full ball" />
-          </label>
+          <p className="dark:text-white text-nft-black-1 font-semibold text-lg ml-1">
+            CyptoKet
+          </p>
         </div>
+      </Link>
+      <Link href="/">
+        <div className="hidden md:flex" onClick={() => {}}>
+          <Image
+            src={images.logo02}
+            objectFit="contain"
+            width={32}
+            height={32}
+            alt="logo"
+          />
+        </div>
+      </Link>
+    </div>
+    <div className="flex flex-initial flex-row justify-end">
+      <div className="flex items-center mr-2">
+        <input
+          type="checkbox"
+          className="checkbox"
+          id="checkbox"
+          onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        />
+        <label
+          htmlFor="checkbox"
+          className="flexBetween w-8 h-4 bg-black rounded-2xl p-1 relative label"
+        >
+          <i className="fas fa-sun" />
+          <i className="fas fa-moon" />
+          <div className="w-3 h-3 absolute bg-white rounded-full ball" />
+        </label>
+      </div>
 
-        <div className="md:hidden flex">
-          <MenuItems active={active} setActive={setActive} />
-          <div className="m;-4">
+      <div className="md:hidden flex">
+        <MenuItems active={active} setActive={setActive} />
+        <div className="ml-4">
+          <ButtonGroup setActive={setActive} router={router} />
+        </div>
+      </div>
+    </div>
+
+    <div className="hidden md:flex ml-2">
+      {isOpen ? (
+        <Image
+          src={images.cross}
+          objectFit="contain"
+          width={20}
+          height={20}
+          alt="close"
+          onClick={() => setIsOpen(false)}
+          className={theme === 'light' && 'filter invert'}
+        />
+      ) : (
+        <Image
+          src={images.menu}
+          objectFit="contain"
+          width={25}
+          height={25}
+          alt="menu"
+          onClick={() => setIsOpen(true)}
+          className={theme === 'light' && 'filter invert'}
+        />
+      )}
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 top-65 dark:bg-nft-dark bg-white
+        z-10 nav-h flex justify-between flex-col"
+        >
+          <div className="flex-1 p-4">
+            <MenuItems active={active} setActive={setActive} isMobile />
+          </div>
+          <div className="p-4 border-t dark:border-nft-black-1 border-nft-grey-1">
             <ButtonGroup setActive={setActive} router={router} />
           </div>
         </div>
-      </div>
-      {/*  In this div we chekc if the isOpen state is true or false and if it is
-       // true then we show the cross icon and if it is false then we show the menu
-      todo icon and we make state change when we click on the menu icon */}
-     <div className="hidden md:flex ml-2" onClick={() => setIsOpen(!isOpen)}>
-  {isOpen ?
-   <Image src={images.cross}
-   objectFit="contain"
-   width={20}
-   height={20}
-   alt="close"
-   // This onclick is for the mobile view and if the user clicks on the cross icon then the menu items will be hidden and if the user clicks on the menu icon then the menu items will be shown
-   onClick={() => setIsOpen(false)}
-   className={theme === 'light' && 'filter invert'}
-   /> 
-  :
-   <Image src={images.menu} 
-   objectFit="contain"
-   width={25}
-   height={25}
-   alt="menu"
-   // in Here setIsOpen(!isOpen) means if the isOpen state is true then the state will be false and if the isOpen state is false then the state will be true its show/hide logic
-   onClick={() => setIsOpen(!isOpen)}
-   className={theme === 'light' && 'filter invert'}
-   />}
-</div>
-    </nav>
-  );
+      )}
+    </div>
+  </nav>
+);
 };
-
 export default Navbar;
