@@ -29,7 +29,7 @@ const NFTCard = ({ nft }) => {
           <div className="flexBetween mt- minlg:mt-3 flex-row md:flex-col md:items-start md:mt-3 ">
             <p className="font-poppins dark:text-white text-nft-black-1 font-semibold text-sm minlg:text-4">
               {nft.price}
-              <span key={nft.id} className="normal">
+              <span key={nft.id} className="normal font-poppins">
                 {nftCurrency}
               </span>
             </p>
