@@ -1,12 +1,13 @@
 import Script from 'next/script'
 import { ThemeProvider } from 'next-themes'
-
+import { NFTProvider } from '@/context/NFTContext'
 import '@/styles/globals.css'
 import { Navbar, Footer } from '@/components'
 
 
 export default function App({ Component, pageProps }) {
   return (
+    <NFTProvider>
     <ThemeProvider attribute='class' defaultTheme='white'>
       <div className='dark:bg-nft-dark bg-white min-h-screen'>
         <Navbar />
@@ -15,5 +16,6 @@ export default function App({ Component, pageProps }) {
       </div>
       <Script src="https://kit.fontawesome.com/789caa2757.js" crossorigin="anonymous"></Script>
     </ThemeProvider>
+    </NFTProvider>
   )
 }
